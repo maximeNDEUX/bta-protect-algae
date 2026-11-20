@@ -8,7 +8,10 @@
 		"maxime-n2"
 	],
 	"contact": {
-		"email": "maxime.mercier@hotmail.com"
+		"email": "maxime.mercier@hotmail.com",
+		"homepage": "https://github.com/maximeNDEUX/bta-protect-algae",
+		"sources": "https://github.com/maximeNDEUX/bta-protect-algae",
+		"issues": "https://github.com/maximeNDEUX/bta-protect-algae/issues"
 	},
 	"icon": "icon.png",
 	"license": "CC0-1.0",
