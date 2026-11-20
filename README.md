@@ -1,39 +1,60 @@
-# Example Mod
+# Protect Algae
 
-Template for making Babric mods for BTA!
+A small [Better than Adventure!](https://www.betterthanadventure.net/) mod that stops snow from destroying algae.
 
-**Note: *DO NOT fork this repository unless you want to contribute!***
+In vanilla BTA, when it snows, still water exposed to the sky slowly turns into ice. Algae do not count as a cover, so the water under them freezes too. Algae need water below them, so they break.
 
-## Prerequisites
-- JDK for Java 21 ([Eclipse Temurin](https://adoptium.net/temurin/releases/) recommended)
-- [Intellij IDEA](https://www.jetbrains.com/idea/download/) (Scroll down for the free community edition, if using linux **DO NOT** use the flatpak distribution)
-- Minecraft Development plugin (Optional, but highly recommended)
+This mod adds a gamerule that, when enabled, prevents snow from freezing water that has algae on top of it.
 
-## Setup instructions
-   
+## Usage
 
-1. Click the `Use this template` button on this repo's page above (Will only appear if logged in). Choose `Create a new repository`, you will be redirected to a new page. Enter your repo's name and description, and hit `Create repository`.  
-   To get your project, open IntelliJ IDEA and click `Clone Repository` (`Get from VCS` on older versions). Select `Repository URL` and enter your repo's url
+The mod adds one gamerule, disabled by default:
 
-2. After the project has finished importing, close it and open it again.  
-   If that does not work, open the right sidebar with `Gradle` on it, open `Tasks` > `fabric` and run `ideaSyncTask`.
+| Gamerule       | Default | Effect                                                                 |
+|----------------|---------|------------------------------------------------------------------------|
+| `protectAlgae` | `false` | When `true`, snow does not freeze water that has algae on top of it. |
 
-3. Create a new run configuration by going in `Run > Edit Configurations`.  
-   Then click on the plus icon and select Gradle. In the `Tasks and Arguments` field enter `build`.  
-   Running it will build your finished jar files and put them in `build/libs/`.
+Enable it with the command below, or in the gamerules section of the world settings when creating a world:
 
-4. Lastly, open `File` > `Settings` and head to `Build, Execution, Development` > `Build Tools` > `Gradle`.  
-   Make sure `Build and run using` and `Run tests using` is set to `Gradle`.
+```
+/gamerule protectAlgae true
+```
 
-5. Done! Now, all that's left is to change every mention of `examplemod` and `turniplabs` to your own mod id and mod group, respectively. Happy modding!
+When the gamerule is disabled, the game behaves exactly as in vanilla.
 
-## Tips
+### What it covers
 
-1. If you haven't already you should join the BTA modding discord! https://discord.gg/FTUNJhswBT
-2. You can set your username when launching the client run configuration by setting `--username <username>` in your program arguments.
-3. When launching the server run configuration you may want to remove the `nogui` program argument in order to see the regular server GUI.
-4. In Intellij you can double press shift or press ctrl+N to search class files, change the search from the default `Project Files` to `All Places` you can easily explore the classes for your dependencies and even BTA itself.
-5. In Intellij if ctrl+left-click on a field or method you can quickly get information on when and where that field or method is assign or used.
-6. Ensure IntelliJ is updated to the latest version. This is important because this template uses the latest Gradle version and if your IntelliJ installation is outdated, it may not support the latest version.
-7. In the `examplemod.mixins.json` you'll see `"compatibilityLevel": "JAVA_${java}",` along with an error message from the `Minecraft Development` plugin stating `Cannot resolve compatibility level 'JAVA_${java}'`. You can safely ignore this. The Gradle build system has been set up to grab the Java version from your `gradle.properties` and replace `${java}` with it. So the compiled binary will properly have it as `JAVA_8`.
+Snow freezes water in two situations, and the gamerule covers both:
+- while it is snowing, as the weather updates random columns;
+- when a chunk is loaded during heavy snowfall.
 
+### Good to know
+
+- Ice normally spreads from the shore or from existing ice towards the middle of the water. Water under algae never freezes, so ice does not spread past it. On a swamp covered in algae, you may see patches of open water next to the algae.
+- Algae can still disappear for other vanilla reasons, such as a lake generated in a new chunk next to them, boats, or players breaking them.
+
+## Requirements
+
+- Better than Adventure! 8.0.1
+- Babric / Fabric Loader `0.18.4-bta.11` or newer
+- [HalpLibe](https://github.com/Turnip-Labs/bta-halplibe) `6.2.0+8.0.1` or newer
+
+## Installation
+
+1. Install BTA 8.0.1 with the Babric loader. The easiest way is the official Babric instance for Prism Launcher / MultiMC (`bta_fabric_instance_8.0.1.zip` from [babric-instance-repo](https://github.com/Turnip-Labs/babric-instance-repo/releases)), which already includes HalpLibe.
+2. Put `protectalgae-<version>.jar` (and HalpLibe, if it is not already there) in the instance's `mods` folder, not in `jarmods`.
+3. In multiplayer, the mod must be installed on the server, which handles the weather.
+
+## Building from source
+
+You need a JDK 21 to run Gradle. The mod itself targets Java 17, and Gradle downloads that toolchain if needed.
+
+```
+./gradlew build
+```
+
+The jar is written to `build/libs/`. To start a development client or server, use `./gradlew runClient` or `./gradlew runServer`.
+
+## License
+
+[CC0 1.0 Universal](LICENSE), public domain.
