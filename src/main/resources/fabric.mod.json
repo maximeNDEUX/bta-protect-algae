@@ -24,6 +24,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",
+		"halplibe": ">=${halplibe}",
 		"minecraft": "*",
 		"java": ">=${java}"
 	},
