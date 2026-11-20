@@ -1,11 +1,11 @@
 {
 	"schemaVersion": 1,
-	"id": "examplemod",
+	"id": "protectalgae",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This mod aims to help new BTA modders.",
+	"name": "Protect Algae",
+	"description": "Adds the protectAlgae gamerule: when enabled, snow no longer freezes water under algae, so algae are not destroyed.",
 	"authors": [
-		"Turnip Labs"
+		"maxime-n2"
 	],
 	"contact": {
 		"homepage": "",
@@ -16,11 +16,11 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"turniplabs.examplemod.ExampleMod"
+			"protectalgae.ProtectAlgae"
 		]
 	},
 	"mixins": [
-		"examplemod.mixins.json"
+		"protectalgae.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=${fabricloader}",

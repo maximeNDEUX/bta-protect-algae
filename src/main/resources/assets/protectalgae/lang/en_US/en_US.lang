@@ -1,0 +1,2 @@
+gamerule.protect_algae.name=Protect Algae
+gamerule.protect_algae.desc=If enabled, snow will not freeze water that has algae on top of it, so the algae are not destroyed.
